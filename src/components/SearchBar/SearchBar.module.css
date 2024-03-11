@@ -1,0 +1,27 @@
+.header{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #242424;
+    border-bottom: 1px solid #fff;
+    z-index: 999;
+
+}
+
+.searchForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.searchForm input{
+    margin: 20px;
+    height: 42px;
+    border-radius: 10px;
+    width: 300px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+}

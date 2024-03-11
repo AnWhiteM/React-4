@@ -1,0 +1,24 @@
+.gallery{
+    margin-top: 110px;
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
+  list-style: none;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.gallery li {
+    margin-bottom: 20px;
+    
+  }
+
+  .gallery li img {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+  }

@@ -1,0 +1,11 @@
+.cardBox {
+   cursor: pointer;
+  }
+
+  .imgBox {
+    transition: transform 0.3s ease; 
+  }
+
+  .cardBox:hover .imgBox {
+    transform: scale(1.05);
+  }
