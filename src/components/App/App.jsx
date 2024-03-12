@@ -1,6 +1,7 @@
 import { SearchBar } from '../SearchBar/SearchBar';
 import { fetchArticles } from '../api';
 import { ImageGallery } from '../ImageGallery/ImageGallery';
+import { ImageModal } from '../ImageModal/ImageModal';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
 import { Loader } from '../Loader/Loader';
 import { LoadMoreBtn } from '../LoadMoreBtn/LoadMoreBtn';
@@ -17,7 +18,8 @@ export const App = () => {
     const [total, setTotal] = useState(null);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const [selectedImg, setSelectedImg] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const handleSearchSubmit = async (newQuery) => {
         setQuery(`${Date.now()}/${newQuery}`);
@@ -27,6 +29,15 @@ export const App = () => {
       };
 
       const handleLoadMore = () => setPage(page + 1);
+
+      const openModal = (img) => {
+        setSelectedImg(img);
+        setModalIsOpen(true);
+      };
+    
+      const closeModal = () => {
+        setModalIsOpen(false);
+      };
 
     useEffect(() => {
         if (query === "") return;
@@ -50,18 +61,23 @@ export const App = () => {
 
     return (
       <>
-         <SearchBar onSearch={handleSearchSubmit} />
+      <SearchBar onSearch={handleSearchSubmit} />
       {error ? (
         <ErrorMessage>Something wrong? try again!</ErrorMessage>
       ) : images.length > 0 ? (
-        <ImageGallery imgs={images} />
+        <>
+          <ImageGallery imgs={images} openModal={openModal} />
+          {selectedImg && (
+            <ImageModal isOpened={modalIsOpen} isClosed={closeModal} img={selectedImg} />
+          )}
+        </>
       ) : null}
       {total === 0 && <ErrorMessage>No results found</ErrorMessage>}
       {loading && <Loader />}
       {images.length > 0 && page * 9 <= total && !loading && !error && (
         <LoadMoreBtn loadMore={handleLoadMore} />
       )}
-      </>
+    </>
       
     );
   };
